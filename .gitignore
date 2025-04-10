@@ -1,0 +1,19 @@
+# Arquivos compilados do Python
+__pycache__/
+*.py[cod]
+
+# Ambiente virtual
+venv/
+env/
+
+# Arquivos de configuração de IDE
+.vscode/
+.idea/
+
+# Arquivos gerados pelo PyInstaller
+dist/
+build/
+*.spec
+
+# Outros arquivos temporários
+*.tmp
