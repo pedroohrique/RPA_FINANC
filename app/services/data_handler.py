@@ -24,7 +24,7 @@ def handler(mensagens):
                 'Forma': formas.get(array[5].strip().upper()),
                 'Parcelamento': str(array[6].strip().upper()),
                 'QTD Parcelas': int(array[7].strip()),
-                'Categoria': categorias.get(array[8].strip())
+                'Categoria': categorias.get(array[8].strip().upper())
             }
                 mensagens_processadas.append(dados)          
 
