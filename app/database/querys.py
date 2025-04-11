@@ -13,7 +13,7 @@ def forma_map() -> dict:
             retorno_query = cursor.fetchall()
             formas = {linha[0]:linha[1] for linha in retorno_query}
             connection.commit()
-            return formas
+        return formas
         
     except Exception as e:
         log.error(f"Falha ao executar a query: {e}")
@@ -28,9 +28,9 @@ def categoria_map() -> dict:
             query = "SELECT DESCRICAO, ID_CATEGORIA FROM TB_CATEGORIA"
             cursor.execute(query)
             retorno_query = cursor.fetchall()
-            categorias = {linha[0]:linha[1] for linha in retorno_query}
+            categorias = {linha[0].upper():linha[1] for linha in retorno_query}
             connection.commit()  
-            return categorias
+        return categorias
         
     except Exception as e:
         log.error(f"Erro ao executar a query: {e}")
