@@ -1,3 +1,0 @@
-2025-04-10 12:39:20,048 / INFO / scrap.py / parser / Scrapy realizado com sucesso! / line: 32
-2025-04-10 12:39:22,513 / INFO / querys.py / inserir_mensagem_coletada / Mensagem coletada com sucesso! ID: 209 / line: 89
-2025-04-10 12:39:22,516 / INFO / querys.py / inserir_mensagem_coletada / Mensagem coletada com sucesso! ID: 210 / line: 89

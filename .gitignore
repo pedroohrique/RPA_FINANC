@@ -17,3 +17,5 @@ build/
 
 # Outros arquivos temporários
 *.tmp
+
+app/utils/log_aplicacao.txt
