@@ -1,8 +1,8 @@
 from app.services.scrap import parser
 from app.services.data_handler import handler
-from app.utils.logger import configura_log
+from app.utils.logger import log_builder
 
-log = configura_log("coleta.py")
+log = log_builder("coleta.py")
 
 class AutomacaoColeta:
     def __init__(self):

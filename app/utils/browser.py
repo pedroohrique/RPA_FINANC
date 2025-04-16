@@ -1,9 +1,9 @@
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from app.utils.logger import configura_log
+from app.utils.logger import log_builder
 
-log = configura_log("browser.py")
+log = log_builder("browser.py")
 
 
 def configura_driver():    

@@ -1,6 +1,6 @@
-from app.utils.logger import configura_log
+from app.utils.logger import log_builder
 from app.database.connection import database_connection
-log = configura_log("querys.py") 
+log = log_builder("querys.py") 
 
 
 

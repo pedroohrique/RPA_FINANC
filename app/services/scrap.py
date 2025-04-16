@@ -3,10 +3,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from app.utils.logger import configura_log
+from app.utils.logger import log_builder
 import time as tempo_carregamento
 
-log = configura_log("scrap.py")
+log = log_builder("scrap.py")
 
 def parser():
     try:        

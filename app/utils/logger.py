@@ -1,6 +1,6 @@
 import logging
 
-def configura_log(logger_name):
+def log_builder(logger_name):
         logger = logging.getLogger(logger_name)
         logger.setLevel(logging.DEBUG)
         file_handler = logging.FileHandler(

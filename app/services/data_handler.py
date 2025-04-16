@@ -1,7 +1,8 @@
-from app.utils.logger import configura_log
+from app.utils.logger import log_builder
 from app.database.querys import verifica_ultima_coleta, forma_map, categoria_map, inserir_mensagem_coletada
 
-log = configura_log("data_handler")
+log = log_builder("data_handler")
+
 id_ultima_coleta = verifica_ultima_coleta()
 formas = forma_map()
 categorias = categoria_map()
