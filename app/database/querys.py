@@ -1,5 +1,6 @@
 from app.utils.logger import log_builder
 from app.database.connection import database_connection
+
 log = log_builder("querys.py") 
 
 
@@ -7,53 +8,45 @@ log = log_builder("querys.py")
 def forma_map() -> dict:
     try:
         connection, cursor = database_connection()
-        with connection as connection:
+        with connection:
             query = "SELECT DESCRICAO, ID_FORMA FROM TB_FORMA_PAGAMENTO"
             cursor.execute(query)
             retorno_query = cursor.fetchall()
             formas = {linha[0]:linha[1] for linha in retorno_query}
-            connection.commit()
         return formas
-        
     except Exception as e:
         log.error(f"Falha ao executar a query: {e}")
     finally:
         cursor.close()
-        connection.close()
 
 def categoria_map() -> dict:
     try:
         connection, cursor = database_connection()
-        with connection as connection:
+        with connection:
             query = "SELECT DESCRICAO, ID_CATEGORIA FROM TB_CATEGORIA"
             cursor.execute(query)
             retorno_query = cursor.fetchall()
             categorias = {linha[0].upper():linha[1] for linha in retorno_query}
-            connection.commit()  
         return categorias
-        
     except Exception as e:
         log.error(f"Erro ao executar a query: {e}")
     finally:
         cursor.close()
-        connection.close()
+
 
 
 def verifica_ultima_coleta():           
     try:
         connection, cursor = database_connection()
-        with connection as connection:             
+        with connection:             
             query = "SELECT TOP 1 ID_COLETA FROM TB_MENSAGENS_COLETADAS ORDER BY ID_COLETA DESC"
             cursor.execute(query)
             retorno_query = cursor.fetchone()
-            connection.commit()
             return retorno_query[0] if retorno_query else 0
-            
     except (ValueError, TypeError) as e:                        
         log.error(f"Erro ao verificar a última mensagem: {e}")
     finally:
         cursor.close()
-        connection.close()
         
         
         
@@ -69,7 +62,7 @@ def inserir_mensagem_coletada(dicionario):
         return False
 
     try:        
-        with connection as connection:
+        with connection:
             
             cursor.execute(
                 query_TMC,(dicionario['ID'], dicionario['Data Compra'], dicionario['Desc'])
@@ -87,7 +80,6 @@ def inserir_mensagem_coletada(dicionario):
                  dicionario['Forma'],)
             )
             log.info(f"Mensagem coletada com sucesso! ID: {dicionario['ID']}")
-            connection.commit()
             dicionario.clear()
             return True
 
@@ -96,5 +88,5 @@ def inserir_mensagem_coletada(dicionario):
         return False
     finally:
         cursor.close()
-        connection.close()
+
 
