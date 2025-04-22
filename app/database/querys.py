@@ -6,22 +6,22 @@ log = log_builder("querys.py")
 
 
 def forma_map() -> dict:
-    try:
-        connection, cursor = database_connection()
+    connection, cursor = database_connection()
+    try:        
         with connection:
             query = "SELECT DESCRICAO, ID_FORMA FROM TB_FORMA_PAGAMENTO"
             cursor.execute(query)
             retorno_query = cursor.fetchall()
-            formas = {linha[0]:linha[1] for linha in retorno_query}
+            formas = {linha[0]:linha[1] for linha in retorno_query}    
         return formas
     except Exception as e:
         log.error(f"Falha ao executar a query: {e}")
     finally:
         cursor.close()
-
+        
 def categoria_map() -> dict:
-    try:
-        connection, cursor = database_connection()
+    connection, cursor = database_connection()
+    try:        
         with connection:
             query = "SELECT DESCRICAO, ID_CATEGORIA FROM TB_CATEGORIA"
             cursor.execute(query)
@@ -32,17 +32,16 @@ def categoria_map() -> dict:
         log.error(f"Erro ao executar a query: {e}")
     finally:
         cursor.close()
+        
 
-
-
-def verifica_ultima_coleta():           
+def verifica_ultima_coleta():     
+    connection, cursor = database_connection()    
     try:
-        connection, cursor = database_connection()
         with connection:             
             query = "SELECT TOP 1 ID_COLETA FROM TB_MENSAGENS_COLETADAS ORDER BY ID_COLETA DESC"
             cursor.execute(query)
-            retorno_query = cursor.fetchone()
-            return retorno_query[0] if retorno_query else 0
+            retorno_query = cursor.fetchone()            
+        return retorno_query[0] if retorno_query else 0
     except (ValueError, TypeError) as e:                        
         log.error(f"Erro ao verificar a última mensagem: {e}")
     finally:
@@ -62,8 +61,7 @@ def inserir_mensagem_coletada(dicionario):
         return False
 
     try:        
-        with connection:
-            
+        with connection:            
             cursor.execute(
                 query_TMC,(dicionario['ID'], dicionario['Data Compra'], dicionario['Desc'])
             )
@@ -88,5 +86,6 @@ def inserir_mensagem_coletada(dicionario):
         return False
     finally:
         cursor.close()
+
 
 

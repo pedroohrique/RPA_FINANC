@@ -3,18 +3,18 @@ from app.database.querys import verifica_ultima_coleta, forma_map, categoria_map
 
 log = log_builder("data_handler")
 
-id_ultima_coleta = verifica_ultima_coleta()
-formas = forma_map()
-categorias = categoria_map()
+
 
 def handler(mensagens):    
     mensagens_processadas = []
-    
+    id_ultima_coleta = verifica_ultima_coleta()
+    formas = forma_map()
+    categorias = categoria_map()
+
     for array in mensagens:
-        try:
+        try:            
             if len(array) != 9:
-                raise ValueError(f"Mensagem fora do padrão esperado! {array}")
-            
+                raise ValueError(f"Mensagem fora do padrão esperado! {array}")            
             if int(array[0]) > id_ultima_coleta:
                 dados = {
                 'ID': int(array[0].strip()),

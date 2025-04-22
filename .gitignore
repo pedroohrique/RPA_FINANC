@@ -19,3 +19,4 @@ build/
 *.tmp
 
 app/utils/log_aplicacao.txt
+app/database/config.json
