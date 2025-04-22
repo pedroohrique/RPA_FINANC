@@ -5,7 +5,7 @@ from app.utils.logger import log_builder
 log = log_builder("database.py")
 
 def load_config():
-    config_path = r"C:\Users\Pedro Henrique\Desktop\RPA_FINANC\app\database\config.json"
+    config_path = r"app\database\config.json"
     try:
         with open(config_path, 'r') as f:
             return json.load(f)
