@@ -14,15 +14,15 @@ def parser():
         driver.get("https://web.whatsapp.com")
         tempo_carregamento.sleep(3)
         
-        elemento_caixa_pesquisa = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.CSS_SELECTOR, "p.selectable-text.copyable-text")))        
+        elemento_caixa_pesquisa = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR, "p.selectable-text.copyable-text")))        
         elemento_caixa_pesquisa.send_keys("Financeiro")
         
         tempo_carregamento.sleep(3)
         
-        elemeno_icone_grupo = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.CSS_SELECTOR, "span.matched-text")))
+        elemeno_icone_grupo = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR, "span.matched-text")))
         elemeno_icone_grupo.click()
         
-        elemento_chat = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[class*='x1vjfegm x1cqoux5 x14yy4lh']"))        )
+        elemento_chat = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[class*='x1vjfegm x1cqoux5 x14yy4lh']"))        )
         
         tempo_carregamento.sleep(3)
         
