@@ -48,6 +48,20 @@ def verifica_ultima_coleta():
         cursor.close()
         
         
+def verifica_mensagem_coletada(id_mensagem):
+    connection, cursor = database_connection()
+    query = "SELECT ID_COLETA FROM TB_MENSAGENS_COLETADAS WHERE ID_COLETA = ?"  
+    
+    try:
+        with connection:
+            cursor.execute(query, (id_mensagem,))
+            retorno_query = cursor.fetchone()
+            return True if retorno_query else False
+    except Exception as e:
+        log.error(f"Falha ao verificar a mensagem coletada: {e}")
+        return False
+    finally:
+        cursor.close()
         
 
 def inserir_mensagem_coletada(dicionario):  
@@ -56,10 +70,12 @@ def inserir_mensagem_coletada(dicionario):
     query_TRF = "INSERT INTO TB_REG_FINANC (DATA_REGISTRO, DATA_GASTO, VALOR, DESCRICAO, LOCAL_GASTO, PARCELAMENTO, N_PARCELAS, IDCATEGORIA, IDFORMA_PAGAMENTO) VALUES (GETDATE(), ?, ?, ?, ?, ?, ?, ?, ?)"
     required_keys = ['ID', 'Data Compra', 'Valor', 'Desc', 'Local', 'Forma', 'Parcelamento', 'QTD Parcelas', 'Categoria']
     
+    id_mensagem = dicionario["ID"]
+    
     if not all(key in dicionario for key in required_keys):
         log.error(f"Chaves faltando: {required_keys}")
         return False
-
+    
     try:        
         with connection:            
             cursor.execute(
@@ -76,16 +92,20 @@ def inserir_mensagem_coletada(dicionario):
                  dicionario['QTD Parcelas'], 
                  dicionario['Categoria'],
                  dicionario['Forma'],)
-            )
-            log.info(f"Mensagem coletada com sucesso! ID: {dicionario['ID']}")
+            )    
+                
             dicionario.clear()
-            return True
-
+        if verifica_mensagem_coletada(id_mensagem=id_mensagem):
+            log.info(f"Mensagem coletada com sucesso! ID: {id_mensagem}")
     except Exception as e:
         log.error(f"Falha ao inserir no banco: {e}")
         return False
     finally:
         cursor.close()
-
+        
+        
+        
+    
+    
 
 
